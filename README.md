@@ -1,7 +1,7 @@
 # start
 
 ```
-$ git clone {}
+$ git clone https://github.com/masum/pollingRedmine_postMattermost.git
 $ npm install
 $ export REDMINE_URL={Redmine URL}
 $ export REDMINE_PROJECT={Redmine Project Name}
