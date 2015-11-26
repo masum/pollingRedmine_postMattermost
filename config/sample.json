@@ -1,11 +1,14 @@
 {
 	"redmine": {
-		"url" : "",
-		"project" : "",
-		"key" : "",
-		"project_id" : ""
+		"url": "",
+		"project": "",
+		"key": "",
+		"project_id": "",
+		"icon": ""
 	},
 	"mattermost": {
-		"endpoint" : ""
+		"host": "",
+		"port": "",
+		"path": ""
 	}
 }
