@@ -1,0 +1,11 @@
+{
+	"redmine": {
+		"url" : "",
+		"project" : "",
+		"key" : "",
+		"project_id" : ""
+	},
+	"mattermost": {
+		"endpoint" : ""
+	}
+}
