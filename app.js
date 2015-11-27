@@ -12,7 +12,11 @@ var enableRedmine = true;
 var enableGitlab = true;
 
 function procRedmine(next) {
-	var env = config.get('redmine');
+	var env = {};
+	try {
+		env = config.get('redmine');
+	} catch (e) {
+	}
 	var redmineEnv = {};
 	redmineEnv['url'] = process.env['REDMINE_URL'] || env['url'];
 	redmineEnv['project'] = process.env['REDMINE_PROJECT'] || env['project'];
