@@ -56,6 +56,9 @@ function makeUrl(param) {
 	if (param.include) {
 		query.push('include=' + param.include);
 	}
+	if (param['status_id']) {
+		query.push('status_id=' + param['status_id']);		
+	} 
 	if (query.length > 0) {
 		var queryStr = query.join('&');
 		url.push('?' + queryStr);
@@ -66,16 +69,17 @@ function makeUrl(param) {
 
 function searchIssues(callback) {
 	restGet(makeUrl({
-		func:'issues.json'
+		'func':'issues.json',
+		'status_id': '*'
 	}), callback);
 }
 
 function fetchIssue(id, callback) {
 	var url = makeUrl({
-		project: '',
-		func: 'issues',
-		id: id,
-		include: 'journals'
+		'project': '',
+		'func': 'issues',
+		'id': id,
+		'include': 'journals'
 	});
 	restGet(url, callback);
 }
@@ -159,8 +163,8 @@ function valueToFieldName(key) {
 
 function procListStatus(next) {
 	var url = makeUrl({
-		project: '',
-		func: 'issue_statuses.json'
+		'project': '',
+		'func': 'issue_statuses.json'
 	});
 	restGet(url, function(data) {
 		statuses = data.issue_statuses;
@@ -169,8 +173,8 @@ function procListStatus(next) {
 }
 function procListTracker(next) {
 	var url = makeUrl({
-		project: '',
-		func: 'trackers.json'
+		'project': '',
+		'func': 'trackers.json'
 	});
 	restGet(url, function(data) {
 		trackers = data.trackers;
@@ -179,7 +183,7 @@ function procListTracker(next) {
 }
 function procListVersions(next) {
 	var url = makeUrl({
-		func: 'versions.json'
+		'func': 'versions.json'
 	});
 	restGet(url, function(data) {
 		versions = data.versions;
@@ -188,7 +192,7 @@ function procListVersions(next) {
 }
 function procListCategories(next) {
 	var url = makeUrl({
-		func: 'issue_categories.json'
+		'func': 'issue_categories.json'
 	});
 	restGet(url, function(data) {
 		categories = data.issue_categories;
@@ -197,7 +201,7 @@ function procListCategories(next) {
 }
 function procListMemberships(next) {
 	var url = makeUrl({
-		func: 'memberships.json'
+		'func': 'memberships.json'
 	});
 	restGet(url, function(data) {
 		var list = data.memberships;
@@ -257,10 +261,10 @@ function oneTicket(id, callback) {
 			if (_lastTime.getTime() <= created.getTime()) {
 				var message = msgbase + '(' + author + ')';
 				results.push({
-					type:'Redmine',
-					msg: message,
-					date: created,
-				    icon: _env['icon']
+					'type':'Redmine',
+					'msg': message,
+					'date': created,
+				    'icon': _env['icon']
 				});
 			}
 			callback();
@@ -273,7 +277,6 @@ function oneTicket(id, callback) {
 			if (_lastTime.getTime() > update.getTime()) {
 				continue;
 			}
-
 			var message = msgbase;
 			if (jou.notes) {
 				message += '\n';
@@ -296,10 +299,10 @@ function oneTicket(id, callback) {
 				message += toMessage(detail.property, user, update, ticket, fieldName, oldvalue, newvalue);		
 			};
 			results.push({
-				type:'Redmine',
-				msg: message,
-				date: update,
-				icon: _env['icon']
+				'type':'Redmine',
+				'msg': message,
+				'date': update,
+				'icon': _env['icon']
 			});
 		}
 		callback();
