@@ -129,11 +129,12 @@ function valueToStringByFieldID(id, value) {
 	} else if (id === 'assigned_to_id') {
 		array = memberships;
 	}
-	
 	for (var i=0;i<array.length;i++) {
-		if (array[i].id.toString() === value) {
-			return array[i].name;
-		}
+        if (array[i]) {
+            if (array[i].id.toString() === value) {
+                return array[i].name;
+            }
+        }
 	}
 	return value;
 }
