@@ -53,7 +53,11 @@ function makeDateStr(date) {
 function MattermostOut() {}
 
 MattermostOut.prototype.push = function(item, callback) {
-	var env = config.get('mattermost');
+	var env = {};
+	try {
+		 env = config.get('mattermost');
+	} catch (e) {
+	}
 	var host = process.env['MATTERMOST_HOST'] || env['host'];
 	var port = process.env['MATTERMOST_PORT'] || env['port'];
 	var path = process.env['MATTERMOST_PATH'] || env['path'];
@@ -94,7 +98,7 @@ function ConsoleOut() {
 ConsoleOut.prototype.push = function(item, callback) {
 	console.log(item.msg);
 	callback();
-} 
+}
 
 var outputModule = new MattermostOut();
 
