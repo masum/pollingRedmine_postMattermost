@@ -258,9 +258,10 @@ function oneTicket(id, callback) {
 		msgbase = msgbase.replace('#{subject}',subject);
 		msgbase = msgbase.replace(/\#{id}/g, id);
 		console.log("「(#" + id  + ")"+ subject + "」, journal:" + item.journals.length);
+		console.log("    lastTime : " + _lastTime + "  /   created" + created);
 		if (item.journals.length === 0) {
 			if (_lastTime.getTime() <= created.getTime()) {
-				var message = msgbase + '(' + author + ')';
+				var message = msgbase + '(' + author + ') [created : ' + date(created) + ']';
 				results.push({
 					'type':'Redmine',
 					'msg': message,
@@ -282,7 +283,7 @@ function oneTicket(id, callback) {
 			if (jou.notes) {
 				message += '\n';
 				message += value(jou.notes, 30);
-				message += '(' + user + ')';
+				message += '(' + user + ') [updated : ' + date(update) + ']';
 			} 
 			for (var k=0; k<jou.details.length; k++) {
 				var detail = jou.details[k];
